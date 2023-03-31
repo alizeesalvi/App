@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -66,9 +67,10 @@ class UsersController extends Controller
                 ->symbols()
                 ],
         ]);
-
+$validated['password']=Hash::make($validated['password']);
         User::create($validated);
 
         return('Informations enregistrées');
     }
+
 }
